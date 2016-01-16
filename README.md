@@ -1,11 +1,11 @@
-# Bison #
+# Dodo #
 
-> Starter Unity Project
+> Starter Unity - Google Cardboard Project
 
 
 ### What is this repository for? ###
 
-Starting development on a new unity project.
+Starting development on a new unity - Google Cardboard project.
 
 
 ### What does this repository do? ###
@@ -13,7 +13,7 @@ Starting development on a new unity project.
 
 # Getting Started #
 
-To get started download [Bison](https://github.com/nilssanderson/bison) with Git:
+To get started download [Dodo](https://github.com/nilssanderson/dodo) with Git:
 ```
-git clone https://github.com/nilssanderson/bison.git
+git clone https://github.com/nilssanderson/dodo.git
 ```
