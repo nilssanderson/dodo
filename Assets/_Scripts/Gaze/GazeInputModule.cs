@@ -8,8 +8,7 @@ using System.Collections.Generic;
 // 2. Disable any other Input Modules (eg: StandaloneInputModule & TouchInputModule) as they will fight over selections.
 // 3. Make sure your Canvas is in world space and has a GraphicRaycaster (should by default).
 // 4. If you have multiple cameras then make sure to drag your VR (center eye) camera into the canvas.
-public class GazeInputModule : PointerInputModule 
-{
+public class GazeInputModule : PointerInputModule {
 	public enum Mode { Click = 0, Gaze };
 	public Mode mode;
 
@@ -28,16 +27,13 @@ public class GazeInputModule : PointerInputModule
 	private GameObject currentLookAtHandler;
 	private float currentLookAtHandlerClickTime;
 
-	public override void Process()
-	{ 
+	public override void Process() { 
 		HandleLook();
 		HandleSelection();
 	}
 
-	void HandleLook()
-	{
-		if (pointerEventData == null)
-		{
+	void HandleLook() {
+		if (pointerEventData == null) {
 			pointerEventData = new PointerEventData(eventSystem);
 		}
 		// fake a pointer always being at the center of the screen
@@ -49,15 +45,12 @@ public class GazeInputModule : PointerInputModule
 		ProcessMove(pointerEventData);
 	}
 	
-	void HandleSelection()
-	{
+	void HandleSelection() {
 		gazeFraction = 0; 
-		if (pointerEventData.pointerEnter != null)
-		{
+		if (pointerEventData.pointerEnter != null) {
 			// if the ui receiver has changed, reset the gaze delay timer
 			GameObject handler = ExecuteEvents.GetEventHandler<IPointerClickHandler>(pointerEventData.pointerEnter);
-			if (currentLookAtHandler != handler)
-			{
+			if (currentLookAtHandler != handler) {
 				gazeGameObject = currentLookAtHandler = handler;
 
 				currentLookAtHandlerClickTime = Time.realtimeSinceStartup + GazeTimeInSeconds;
@@ -71,8 +64,7 @@ public class GazeInputModule : PointerInputModule
 			    (mode == Mode.Gaze && Time.realtimeSinceStartup > currentLookAtHandlerClickTime) || 
 			    (mode == Mode.Click && Input.GetButtonDown(ClickInputName)))
 			{
-				if (EventSystem.current.currentSelectedGameObject != null)
-				{
+				if (EventSystem.current.currentSelectedGameObject != null) {
 		//			ExecuteEvents.ExecuteHierarchy(EventSystem.current.currentSelectedGameObject, pointerEventData, ExecuteEvents.deselectHandler);
 				}
 
@@ -83,9 +75,7 @@ public class GazeInputModule : PointerInputModule
 				currentLookAtHandlerClickTime = float.MaxValue;
 							ExecuteEvents.ExecuteHierarchy(EventSystem.current.currentSelectedGameObject, pointerEventData, ExecuteEvents.deselectHandler);
 			}
-		}
-		else
-		{
+		} else {
 			gazeGameObject = currentLookAtHandler = null;
 		}
 	}
